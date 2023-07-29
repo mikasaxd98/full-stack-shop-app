@@ -7,19 +7,21 @@ module.exports.login = async function (req, res) {
   const userFromDb = await User.findOne({email: req.body.email});
   const userPassHashFormDb = userFromDb?.password;
   const passResult = userPassHashFormDb ? bcrypt.compareSync(req.body.password, userPassHashFormDb) : false;
-  if (!userFromDb && !passResult) {
+
+  if (userFromDb && passResult) {
+    const token = jwt.sign({
+      email: userFromDb.email,
+      userId: userFromDb._id.toString(),
+    }, keys.JWT_WEB_TOKEN, {expiresIn: '1h'});
+    res.status(200).json({
+      token: `Bearer ${token}`
+    });
+  } else {
     res.status(404).json({
       message: "Invalid email or password"
     });
-    return;
   }
-  const token = jwt.sign({
-    email: userFromDb.email,
-    userId: userFromDb._id.toString(),
-  }, keys.JWT_WEB_TOKEN, {expiresIn: '1h'});
-  res.status(200).json({
-    token: `Bearer ${token}`
-  });
+
 
 }
 
