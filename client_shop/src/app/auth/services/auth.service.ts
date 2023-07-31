@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environment/environment.local';
-import {Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../intefaces/user.interface';
 
 @Injectable( {
@@ -11,26 +11,26 @@ export class AuthService {
   private token: string | null = '';
   public url = environment.API_URL;
 
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient) {
 
   }
 
-  public login( user: User ): Observable<{token: string }> {
-    return this.http.post<{token: string }>( `${this.url}/api/auth/login`, user )
+  public login( user: User ): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>( `${this.url}/api/auth/login`, user )
       .pipe(
-        tap(({token}) => {
-          localStorage.setItem('auth-token', token);
-          this.setToken(token);
-        })
+        tap( ( { token } ) => {
+          localStorage.setItem( 'auth-token', token );
+          this.setToken( token );
+        } )
       );
   }
 
-  public register(user: User): Observable<User> {
+  public register( user: User ): Observable<User> {
     return this.http.post<User>( `${this.url}/api/auth/register`, user )
       .pipe(
-        tap(() => {
-          localStorage.setItem('auth-token', 'test')
-        })
+        tap( () => {
+          localStorage.setItem( 'auth-token', 'test' )
+        } )
       )
   }
 
@@ -43,11 +43,11 @@ export class AuthService {
   }
 
   public logOut() {
-    this.setToken(null);
+    this.setToken( null );
     localStorage.clear();
   }
 
-  public setToken(token: string | null) {
+  public setToken( token: string | null ) {
     this.token = token;
   }
 
