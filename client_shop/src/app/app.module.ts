@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { MainPageModule } from './main-page/main-page.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,15 @@ import { MainPageModule } from './main-page/main-page.module';
     AppRoutingModule,
     RouterModule,
     AuthModule,
-    MainPageModule
+    MainPageModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

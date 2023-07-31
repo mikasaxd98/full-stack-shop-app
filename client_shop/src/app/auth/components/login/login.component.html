@@ -17,7 +17,7 @@
      <a href="#" class="link-success">Forgot password? Reset here</a>
     </div>
     <div class="text-center mt-3">
-      <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+      <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid || loginForm.disabled">Login</button>
     </div>
   </form>
 </div>
