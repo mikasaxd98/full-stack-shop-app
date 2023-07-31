@@ -41,7 +41,7 @@ export class LoginComponent {
         .subscribe( {
           next: () => this.router.navigate( ['/'] ),
           error: ( err: HttpErrorResponse ) => {
-            this.errors = err.error.errors.map( (x: any) => x.message );
+
           }
         } )
     }
