@@ -27,7 +27,7 @@ export class RegisterComponent implements OnDestroy {
 
   constructor(private authService: AuthService, private router: Router) {
     this.registerForm = new FormGroup( {
-      email: new FormControl( '', Validators.required ),
+      email: new FormControl( '', [Validators.required, Validators.email] ),
       password: new FormControl( '', Validators.required ),
     } );
   }

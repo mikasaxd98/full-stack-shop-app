@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AuthService } from '../../auth/services/auth.service';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor( private auth: AuthService, private router: Router) {
+  constructor( private auth: AuthService, private router: Router ) {
   }
 
   intercept( req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
@@ -23,11 +23,14 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handleError( error: HttpErrorResponse ): Observable<any> {
-    this.router.navigate(['/login'], {
-      queryParams: {
-        sessionExpired: true
-      }
-    })
-    return of([])
+    // check session token
+    if ( error.status === 401 ) {
+      this.router.navigate( ['/login'], {
+        queryParams: {
+          sessionExpired: true
+        }
+      } );
+    }
+    return throwError( () => error );
   }
 }
