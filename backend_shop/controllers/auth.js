@@ -13,7 +13,7 @@ module.exports.login = async function (req, res, next) {
     const token = jwt.sign({
       email: userFromDb.email,
       userId: userFromDb._id.toString(),
-    }, keys.JWT_WEB_TOKEN, {expiresIn: '1min'});
+    }, keys.JWT_WEB_TOKEN, {expiresIn: '1h'});
     res.status(200).json({
       token: `Bearer ${token}`
     });
