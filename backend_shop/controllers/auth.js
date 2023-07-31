@@ -2,8 +2,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const keys = require('../configs/keys');
+const errorHandler = require('../middleware/error.middleware')
 
-module.exports.login = async function (req, res) {
+module.exports.login = async function (req, res, next) {
   const userFromDb = await User.findOne({email: req.body.email});
   const userPassHashFormDb = userFromDb?.password;
   const passResult = userPassHashFormDb ? bcrypt.compareSync(req.body.password, userPassHashFormDb) : false;
@@ -17,9 +18,9 @@ module.exports.login = async function (req, res) {
       token: `Bearer ${token}`
     });
   } else {
-    res.status(404).json({
-      message: "Invalid email or password"
-    });
+    const err = new Error('Invalid email or password');
+    err.statusCode = 400;
+    next(err);
   }
 
 
