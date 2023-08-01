@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { MainPageModule } from './main-page/main-page.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
     RouterModule,
     AuthModule,
     MainPageModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
