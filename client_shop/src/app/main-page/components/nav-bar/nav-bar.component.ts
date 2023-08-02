@@ -3,6 +3,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconButton } from '@angular/material/button';
 import { DeviceService } from '../../../shared/services/device.service';
 import { distinctUntilChanged, fromEvent } from 'rxjs';
+import { Router } from '@angular/router';
+import { NAV_ITEMS } from '../../../shared/consts/nav-items';
+
+
 
 @Component( {
   selector: 'app-nav-bar',
@@ -17,8 +21,9 @@ export class NavBarComponent {
   @ViewChild( 'button', { static: false } )
   public button: MatIconButton;
 
+  public NAV_ITEMS = NAV_ITEMS;
 
-  constructor( public deviceService: DeviceService, private cdr: ChangeDetectorRef ) {
+  constructor( public deviceService: DeviceService, private cdr: ChangeDetectorRef, private router: Router) {
   }
 
   ngAfterViewInit() {
