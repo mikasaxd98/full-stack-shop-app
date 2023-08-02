@@ -23,7 +23,7 @@ export class NavBarComponent {
 
   public NAV_ITEMS = NAV_ITEMS;
 
-  constructor( public deviceService: DeviceService, private cdr: ChangeDetectorRef, private router: Router) {
+  constructor( public deviceService: DeviceService, private cdr: ChangeDetectorRef) {
   }
 
   ngAfterViewInit() {
