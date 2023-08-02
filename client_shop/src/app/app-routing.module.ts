@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./main-page/main-page.module').then( m => m.MainPageModule)
   },
   {
-    path: '',
+    path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
   },
   {

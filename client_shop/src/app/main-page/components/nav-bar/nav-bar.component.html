@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <button #button mat-icon-button class="example-icon" *ngIf="(deviceService.isMobile$ | async)"
+          aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="w-100">
+    <span>Shop</span>
+  </div>
+  <div class="links" *ngIf="!(deviceService.isMobile$ | async)">
+    <ng-container *ngFor="let item of NAV_ITEMS">
+      <ng-container [ngTemplateOutlet]="item.type === 'link' ? linkType : buttonType"
+                    [ngTemplateOutletContext]="{item:item}"></ng-container>
+    </ng-container>
+  </div>
+</mat-toolbar>
+<router-outlet  *ngIf="!(deviceService.isMobile$ | async)"></router-outlet>
+<mat-drawer-container class="example-container" *ngIf="(deviceService.isMobile$ | async)">
+  <mat-drawer #drawer mode="push" opened>
+    <mat-nav-list>
+      <ng-container *ngFor="let item of NAV_ITEMS">
+        <mat-list-item [routerLink]="item.route">
+          <button mat-button>
+            <mat-icon>{{item.icon}}</mat-icon>
+            {{item.title}}
+          </button>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<ng-template #linkType let-item="item">
+  <button mat-button [routerLink]="item.route">{{item.title}}</button>
+</ng-template>
+
+<ng-template #buttonType let-item="item">
+  <button [routerLink]="item.route" mat-raised-button
+          color="accent">{{item.title}}</button>
+</ng-template>
+
+<ng-template #linkTypeMobile let-item="item">
+  <button mat-button [routerLink]="item.route">{{item.title}}</button>
+</ng-template>
+
