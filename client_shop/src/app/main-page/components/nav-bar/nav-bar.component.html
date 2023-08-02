@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  <button #button mat-icon-button class="example-icon"  *ngIf="(deviceService.isMobile$ | async)"
+          aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="w-100">
+    <span>Shop</span>
+  </div>
+  <div class="links" *ngIf="!(deviceService.isMobile$ | async)">
+    <button mat-button>Home</button>
+    <button mat-button>Settings</button>
+    <button mat-raised-button color="accent" class="mx-2">Sign Up</button>
+    <button mat-raised-button color="accent">Log out</button>
+  </div>
+  <div class="d-flex icons">
+    <button mat-icon-button>
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-drawer-container class="example-container" *ngIf="(deviceService.isMobile$ | async)">
+  <mat-drawer #drawer mode="over" opened>
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-button>
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button>
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button>
+          <mat-icon>dashboard</mat-icon>
+          Computer
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
