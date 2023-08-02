@@ -9,10 +9,13 @@ import { MainPageModule } from './main-page/main-page.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileContainerComponent } from './profile/components/profile-container/profile-container.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileContainerComponent,
   ],
   imports: [
     BrowserModule,

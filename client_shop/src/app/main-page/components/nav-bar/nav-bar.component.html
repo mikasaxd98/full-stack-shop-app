@@ -11,9 +11,9 @@
       <ng-container [ngTemplateOutlet]="item.type === 'link' ? linkType : buttonType"
                     [ngTemplateOutletContext]="{item:item}"></ng-container>
     </ng-container>
-
   </div>
 </mat-toolbar>
+<router-outlet  *ngIf="!(deviceService.isMobile$ | async)"></router-outlet>
 <mat-drawer-container class="example-container" *ngIf="(deviceService.isMobile$ | async)">
   <mat-drawer #drawer mode="push" opened>
     <mat-nav-list>

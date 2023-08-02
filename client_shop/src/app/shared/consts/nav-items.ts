@@ -1,7 +1,7 @@
 export const NAV_ITEMS = [{
   title: 'Home',
   icon: 'home',
-  route: '/',
+  route: '/home',
   type: 'link'
 },
   {

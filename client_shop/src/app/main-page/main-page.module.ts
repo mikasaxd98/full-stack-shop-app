@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainPageContainerComponent } from './components/main-page-container/main-page-container.component';
 import { MainPageRoutingModule } from './main-page-routing.module';
-import { UserProfilePageContainerComponent } from './components/user-profile-page-container/user-profile-page-container.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +14,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     MainPageContainerComponent,
-    UserProfilePageContainerComponent,
     NavBarComponent,
   ],
   imports: [
