@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconButton } from '@angular/material/button';
 import { DeviceService } from '../../../shared/services/device.service';
@@ -8,6 +8,7 @@ import { distinctUntilChanged, fromEvent } from 'rxjs';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class NavBarComponent {
   @ViewChild( 'drawer', { static: false } )
@@ -28,7 +29,8 @@ export class NavBarComponent {
       if ( isMobile ) {
         fromEvent( this.button?._elementRef.nativeElement, 'click' ).subscribe( {
           next: () => {
-            this.drawer.toggle()
+            this.drawer.toggle();
+            this.cdr.detectChanges();
           },
         } )
       }
